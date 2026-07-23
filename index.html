@@ -3,212 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athar Commerce | أثر - E-Commerce Web Design</title>
-    <!-- Using Google Fonts for English and Arabic typography -->
+    <title>Athar Commerce | أثر</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS Variables for easy theming */
         :root {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-color: #38bdf8;
-            --accent-hover: #0284c7;
-            --transition: all 0.3s ease;
+            --bg-color: #050505;
+            --card-bg: #111111;
+            --text-main: #ffffff;
+            --accent: #38bdf8;
         }
 
-        /* Reset & Base Styles */
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: 'Poppins', 'Cairo', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 4rem;
         }
 
-        /* Typography */
-        h1, h2, h3 {
-            font-weight: 700;
-        }
-        
-        .arabic-text {
-            font-family: 'Cairo', sans-serif;
-        }
-
-        /* Header */
+        /* Glassmorphism Header */
         header {
-            background-color: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            padding: 1.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            background: rgba(5, 5, 5, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.5rem 2rem;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo {
-            font-size: 2rem;
-            color: var(--text-primary);
+            font-size: 1.8rem;
+            font-weight: 600;
             text-decoration: none;
+            color: var(--text-main);
+            letter-spacing: 1px;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .logo span {
-            color: var(--accent-color);
+            color: var(--accent);
         }
 
-        .tagline {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        /* Grid System */
-        .grid {
+        /* Gallery Grid */
+        .gallery-container {
+            max-width: 1400px;
+            margin: 7rem auto 2rem;
+            padding: 0 1.5rem;
             display: grid;
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            grid-auto-flow: dense;
         }
 
-        .grid-desktop {
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-
-        .grid-mobile {
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            justify-content: center;
-        }
-
-        /* Media Cards */
-        .card {
-            background-color: var(--surface-color);
-            border-radius: 16px;
+        /* Media Cards styling */
+        .media-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: rgba(56, 189, 248, 0.3);
-        }
-
-        .media-container {
             position: relative;
-            width: 100%;
-            background-color: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .desktop-media {
-            aspect-ratio: 16 / 9;
+        .media-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border-color: rgba(56, 189, 248, 0.3);
+            z-index: 2;
         }
 
-        .mobile-media {
-            aspect-ratio: 9 / 16;
-            max-width: 300px;
-            margin: 0 auto;
-        }
-
-        video, img {
+        .media-card img, 
+        .media-card video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.6s ease;
         }
 
-        /* Optional Mockup Overlays for Polish */
-        .mockup-frame {
-            padding: 1rem;
-            background: linear-gradient(145deg, #1e293b, #0f172a);
+        .media-card:hover img,
+        .media-card:hover video {
+            transform: scale(1.04);
+        }
+
+        /* Layout Management for Aspect Ratios */
+        .landscape {
+            grid-column: span 2;
+            aspect-ratio: 16 / 9;
         }
         
-        .mobile-card {
-            max-width: 320px;
-            margin: 0 auto;
-            border-radius: 30px;
-            padding: 8px;
-            background: #334155;
+        .portrait {
+            grid-column: span 1;
+            aspect-ratio: 9 / 16;
         }
 
-        .mobile-card video {
-            border-radius: 22px;
+        .standard-img {
+            grid-column: span 1;
+            aspect-ratio: 4 / 3;
         }
 
-        .card-info {
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        .card-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #020617;
-            padding: 3rem 2rem;
-            text-align: center;
-            margin-top: 4rem;
-        }
-
-        footer p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container { padding: 2rem 1rem; }
-            .section-header h2 { font-size: 2rem; }
+        /* Responsive Design Adjustments */
+        @media (max-width: 900px) {
+            .landscape {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
@@ -216,132 +132,76 @@
 
     <header>
         <a href="#" class="logo">
-            Athar <span>Commerce</span> | <span class="arabic-text">أثر</span>
+            Athar <span>Commerce</span> | <span style="font-family: 'Cairo', sans-serif;">أثر</span>
         </a>
-        <p class="tagline">Crafting High-Converting Digital Storefronts</p>
     </header>
 
-    <main class="container">
+    <main class="gallery-container">
         
-        <!-- Desktop Projects Section -->
-        <section id="desktop-projects" style="margin-bottom: 6rem;">
-            <div class="section-header">
-                <h2>Desktop Experiences</h2>
-                <p style="color: var(--text-secondary);">Immersive e-commerce interfaces optimized for web.</p>
-            </div>
-            <div class="grid grid-desktop">
-                <!-- PC Video 1 -->
-                <div class="card">
-                    <div class="mockup-frame">
-                        <div class="media-container desktop-media" style="border-radius: 8px; overflow: hidden;">
-                            <video src="PC1_compressed.mp4" autoplay loop muted playsinline controls></video>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3>Web Storefront Alpha</h3>
-                    </div>
-                </div>
-                <!-- PC Video 2 -->
-                <div class="card">
-                    <div class="mockup-frame">
-                        <div class="media-container desktop-media" style="border-radius: 8px; overflow: hidden;">
-                            <video src="PC2_compressed.mp4" autoplay loop muted playsinline controls></video>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3>Web Storefront Beta</h3>
-                    </div>
-                </div>
-                <!-- PC Video 3 -->
-                <div class="card">
-                    <div class="mockup-frame">
-                        <div class="media-container desktop-media" style="border-radius: 8px; overflow: hidden;">
-                            <video src="PC3_compressed.mp4" autoplay loop muted playsinline controls></video>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3>Web Storefront Gamma</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Ordered Images 1 to 6 -->
+        <div class="media-card standard-img">
+            <img src="Image1.jpg" alt="Athar Commerce Project 1" loading="lazy">
+        </div>
+        <div class="media-card standard-img">
+            <img src="Image2.jpg" alt="Athar Commerce Project 2" loading="lazy">
+        </div>
+        <div class="media-card standard-img">
+            <img src="Image3.jpg" alt="Athar Commerce Project 3" loading="lazy">
+        </div>
+        <div class="media-card standard-img">
+            <img src="Image4.jpg" alt="Athar Commerce Project 4" loading="lazy">
+        </div>
+        <div class="media-card standard-img">
+            <img src="Image5.jpg" alt="Athar Commerce Project 5" loading="lazy">
+        </div>
+        <div class="media-card standard-img">
+            <img src="Image6.jpg" alt="Athar Commerce Project 6" loading="lazy">
+        </div>
 
-        <!-- Mobile Projects Section -->
-        <section id="mobile-projects" style="margin-bottom: 6rem;">
-            <div class="section-header">
-                <h2>Mobile Commerce</h2>
-                <p style="color: var(--text-secondary);">Seamless shopping experiences in the palm of your hand.</p>
-            </div>
-            <div class="grid grid-mobile">
-                <!-- Phone Video 1 -->
-                <div class="card mobile-card">
-                    <div class="media-container mobile-media">
-                        <video src="Phone1_compressed.mp4" autoplay loop muted playsinline controls></video>
-                    </div>
-                </div>
-                <!-- Phone Video 2 -->
-                <div class="card mobile-card">
-                    <div class="media-container mobile-media">
-                        <video src="Phone2_compressed.mp4" autoplay loop muted playsinline controls></video>
-                    </div>
-                </div>
-                <!-- Phone Video 3 -->
-                <div class="card mobile-card">
-                    <div class="media-container mobile-media">
-                        <video src="Phone3_compressed.mp4" autoplay loop muted playsinline controls></video>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Static Designs Section -->
-        <section id="static-designs">
-            <div class="section-header">
-                <h2>Design Gallery</h2>
-                <p style="color: var(--text-secondary);">High-fidelity UI concepts and promotional layouts.</p>
-            </div>
-            <div class="grid grid-desktop">
-                <!-- Image 1 -->
-                <div class="card">
-                    <div class="media-container">
-                        <img src="Image1.jpg" alt="Athar Commerce UI Concept 1" loading="lazy">
-                    </div>
-                    <div class="card-info">
-                        <h3>UI Concept 1</h3>
-                    </div>
-                </div>
-                <!-- Image 2 -->
-                <div class="card">
-                    <div class="media-container">
-                        <img src="Image2.jpg" alt="Athar Commerce UI Concept 2" loading="lazy">
-                    </div>
-                    <div class="card-info">
-                        <h3>UI Concept 2</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Ordered Videos -->
+        <div class="media-card landscape">
+            <video src="PC1.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="media-card portrait">
+            <video src="Phone2.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="media-card landscape">
+            <video src="PC3.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="media-card portrait">
+            <video src="Phone3.mp4" autoplay loop muted playsinline></video>
+        </div>
 
     </main>
 
-    <footer>
-        <p>&copy; 2026 Athar Commerce | أثر. All rights reserved.</p>
-    </footer>
-
     <script>
-        // Optional JavaScript to handle smooth video playback on interaction
-        // Adds a play promise to avoid DOMException on aggressive autoplay policies
+        // Optimization: Intersection Observer for videos so they only play when visible
         document.addEventListener('DOMContentLoaded', () => {
             const videos = document.querySelectorAll('video');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.play().catch(e => console.log("Autoplay blocked:", e));
+                    } else {
+                        entry.target.pause();
+                    }
+                });
+            }, { threshold: 0.2 });
+
             videos.forEach(video => {
-                video.addEventListener('mouseover', () => {
-                    if (video.paused) {
-                        video.play().catch(e => console.log("Autoplay prevented by browser", e));
+                observer.observe(video);
+                
+                // Double-click to fullscreen video
+                video.addEventListener('dblclick', () => {
+                    if (video.requestFullscreen) {
+                        video.requestFullscreen();
+                    } else if (video.webkitRequestFullscreen) {
+                        video.webkitRequestFullscreen();
                     }
                 });
             });
         });
     </script>
 </body>
-                      </html>
-                      
+</html>

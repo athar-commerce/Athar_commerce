@@ -6,12 +6,13 @@
     <title>Athar Commerce | أثر</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #050505;
             --card-bg: #111111;
             --text-main: #ffffff;
+            --text-muted: #94a3b8;
             --accent: #38bdf8;
         }
 
@@ -25,7 +26,7 @@
             font-family: 'Poppins', 'Cairo', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.5;
+            line-height: 1.6;
             padding-bottom: 4rem;
         }
 
@@ -34,18 +35,18 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(5, 5, 5, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            padding: 1.5rem 2rem;
+            padding: 1.2rem 2rem;
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .logo {
             font-size: 1.8rem;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
             color: var(--text-main);
             letter-spacing: 1px;
@@ -58,10 +59,35 @@
             color: var(--accent);
         }
 
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 9rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+            background: linear-gradient(to right, #ffffff, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
         /* Gallery Grid */
         .gallery-container {
             max-width: 1400px;
-            margin: 7rem auto 2rem;
+            margin: 0 auto 2rem;
             padding: 0 1.5rem;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -72,20 +98,20 @@
         /* Media Cards styling */
         .media-card {
             background-color: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 4px; /* Sharper corners to prevent hiding image details */
             overflow: hidden;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .media-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             border-color: rgba(56, 189, 248, 0.3);
             z-index: 2;
         }
@@ -96,12 +122,6 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease;
-        }
-
-        .media-card:hover img,
-        .media-card:hover video {
-            transform: scale(1.04);
         }
 
         /* Layout Management for Aspect Ratios */
@@ -125,6 +145,9 @@
             .landscape {
                 grid-column: span 1;
             }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
         }
     </style>
 </head>
@@ -136,9 +159,14 @@
         </a>
     </header>
 
+    <section class="hero">
+        <h1>Transforming Clicks into Loyal Customers</h1>
+        <p>At Athar Commerce, we specialize in crafting high-converting e-commerce experiences. We design strategic, visually stunning websites tailored to drive sales, optimize user journeys, and scale your brand's digital presence.</p>
+    </section>
+
     <main class="gallery-container">
         
-        <!-- Ordered Images 1 to 6 -->
+        <!-- Standard Desktop/Horizontal Images -->
         <div class="media-card standard-img">
             <img src="Image1.jpg" alt="Athar Commerce Project 1" loading="lazy">
         </div>
@@ -148,60 +176,33 @@
         <div class="media-card standard-img">
             <img src="Image3.jpg" alt="Athar Commerce Project 3" loading="lazy">
         </div>
-        <div class="media-card standard-img">
-            <img src="Image4.jpg" alt="Athar Commerce Project 4" loading="lazy">
+
+        <!-- Vertical Phone Images -->
+        <div class="media-card portrait">
+            <img src="Image4.jpg" alt="Athar Commerce Mobile Project 4" loading="lazy">
         </div>
-        <div class="media-card standard-img">
-            <img src="Image5.jpg" alt="Athar Commerce Project 5" loading="lazy">
+        <div class="media-card portrait">
+            <img src="Image5.jpg" alt="Athar Commerce Mobile Project 5" loading="lazy">
         </div>
-        <div class="media-card standard-img">
-            <img src="Image6.jpg" alt="Athar Commerce Project 6" loading="lazy">
+        <div class="media-card portrait">
+            <img src="Image6.jpg" alt="Athar Commerce Mobile Project 6" loading="lazy">
         </div>
 
         <!-- Ordered Videos -->
         <div class="media-card landscape">
-            <video src="PC1.mp4" autoplay loop muted playsinline></video>
+            <video src="PC1.mp4" autoplay loop muted playsinline controls></video>
         </div>
         <div class="media-card portrait">
-            <video src="Phone2.mp4" autoplay loop muted playsinline></video>
+            <video src="Phone2.mp4" autoplay loop muted playsinline controls></video>
         </div>
         <div class="media-card landscape">
-            <video src="PC3.mp4" autoplay loop muted playsinline></video>
+            <video src="PC3.mp4" autoplay loop muted playsinline controls></video>
         </div>
         <div class="media-card portrait">
-            <video src="Phone3.mp4" autoplay loop muted playsinline></video>
+            <video src="Phone3.mp4" autoplay loop muted playsinline controls></video>
         </div>
 
     </main>
 
-    <script>
-        // Optimization: Intersection Observer for videos so they only play when visible
-        document.addEventListener('DOMContentLoaded', () => {
-            const videos = document.querySelectorAll('video');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.play().catch(e => console.log("Autoplay blocked:", e));
-                    } else {
-                        entry.target.pause();
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            videos.forEach(video => {
-                observer.observe(video);
-                
-                // Double-click to fullscreen video
-                video.addEventListener('dblclick', () => {
-                    if (video.requestFullscreen) {
-                        video.requestFullscreen();
-                    } else if (video.webkitRequestFullscreen) {
-                        video.webkitRequestFullscreen();
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

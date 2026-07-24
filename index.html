@@ -38,7 +38,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Header – clean, glass effect */
     header {
       position: sticky;
       top: 0;
@@ -75,7 +74,6 @@
       margin-left: 0.2rem;
     }
 
-    /* Hero – modern gradient text */
     .hero {
       text-align: center;
       padding: 5rem 1.5rem 2.5rem;
@@ -102,7 +100,6 @@
       font-weight: 400;
     }
 
-    /* Section intro */
     .section-intro {
       text-align: center;
       max-width: 750px;
@@ -128,7 +125,6 @@
       flex: 1;
     }
 
-    /* Gallery grid – responsive & dense */
     .gallery-container {
       max-width: 1400px;
       margin: 0 auto 4rem;
@@ -139,7 +135,6 @@
       grid-auto-flow: dense;
     }
 
-    /* Media cards */
     .media-card {
       background-color: var(--card-bg);
       border-radius: var(--radius-card);
@@ -174,7 +169,19 @@
       transform: scale(1.02);
     }
 
-    /* Aspect ratios for layout variety */
+    .video-error {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: #1a1a1a;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
     .pc-format {
       grid-column: span 2;
       aspect-ratio: 1841 / 932;
@@ -185,7 +192,7 @@
       aspect-ratio: 1080 / 2127;
     }
 
-    /* Lightbox (fullscreen viewer with arrows) */
+    /* Lightbox */
     .lightbox {
       display: none;
       position: fixed;
@@ -310,7 +317,6 @@
       letter-spacing: 0.4px;
     }
 
-    /* Footer */
     footer {
       background-color: var(--card-bg);
       border-top: 1px solid var(--border-dim);
@@ -347,7 +353,6 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive adjustments */
     @media (max-width: 900px) {
       .pc-format {
         grid-column: span 1;
@@ -405,15 +410,15 @@
 
     <section class="section-intro">
       <h2>Design concepts & previews</h2>
-      <p>A closer look at our structural layouts and visual mockups.</p>
+      <p>A closer look at our structural layouts and visual mockups. Click any image or video to browse the full collection with navigation arrows.</p>
     </section>
 
     <main class="gallery-container" id="galleryContainer">
-      <!-- Media items dynamically populated via JS to manage lightbox order -->
+      <!-- Dynamically populated -->
     </main>
   </div>
 
-  <!-- Lightbox markup -->
+  <!-- Lightbox -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <button class="close-btn" id="closeLightbox" aria-label="Close gallery">&times;</button>
     <button class="nav-arrow prev-btn" id="prevBtn" aria-label="Previous media">‹</button>
@@ -433,7 +438,7 @@
 
   <script>
     (function() {
-      // --- Media data (production ready, no placeholders) ---
+      // Media data
       const mediaItems = [
         { type: 'image', src: 'Image1.jpg', alt: 'Athar Commerce desktop layout concept', formatClass: 'pc-format' },
         { type: 'image', src: 'Image2.jpg', alt: 'Athar Commerce brand showcase design', formatClass: 'pc-format' },
@@ -456,12 +461,51 @@
       const counterEl = document.getElementById('lightboxCounter');
 
       let currentIndex = 0;
-      let mediaElements = []; // store DOM elements for focus if needed
 
-      // Build gallery dynamically
+      // Helper to create video element with proper attributes for GitHub Pages
+      function createVideoElement(src, includeControls = true) {
+        const video = document.createElement('video');
+        video.src = src;
+        video.setAttribute('playsinline', '');
+        video.setAttribute('preload', 'metadata');
+        video.setAttribute('muted', '');
+        video.setAttribute('loop', '');
+        
+        if (includeControls) {
+          video.setAttribute('controls', '');
+        }
+        
+        // Critical for GitHub Pages: ensure video loads properly
+        video.setAttribute('crossorigin', 'anonymous');
+        
+        // Add error handling
+        video.addEventListener('error', function(e) {
+          console.warn('Video loading error:', src, e);
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'video-error';
+          errorDiv.innerHTML = '⚠️ Video loading...<br><small>If issue persists, check file path</small>';
+          
+          if (video.parentElement) {
+            video.style.display = 'none';
+            video.parentElement.appendChild(errorDiv);
+          }
+        });
+        
+        // Try to load video
+        video.addEventListener('loadeddata', function() {
+          video.play().catch(err => {
+            console.log('Autoplay prevented:', err);
+          });
+        });
+        
+        return video;
+      }
+
+      // Build gallery
       function buildGallery() {
         if (!galleryContainer) return;
         galleryContainer.innerHTML = '';
+        
         mediaItems.forEach((item, index) => {
           const card = document.createElement('div');
           card.className = `media-card ${item.formatClass}`;
@@ -475,29 +519,24 @@
             mediaElement.alt = item.alt;
             mediaElement.loading = 'lazy';
           } else {
-            mediaElement = document.createElement('video');
-            mediaElement.src = item.src;
-            mediaElement.setAttribute('playsinline', '');
-            mediaElement.setAttribute('muted', '');
-            mediaElement.setAttribute('loop', '');
-            mediaElement.setAttribute('controls', '');
-            mediaElement.setAttribute('preload', 'metadata');
-            // For better UX, video autoplay is paused in lightbox; in grid we keep muted autoplay
+            // Video with autoplay in gallery
+            mediaElement = createVideoElement(item.src, false);
             mediaElement.setAttribute('autoplay', '');
           }
 
           card.appendChild(mediaElement);
-          card.addEventListener('click', (e) => {
-            // Prevent opening lightbox if user clicks video controls (but still allow navigation)
-            if (e.target.tagName === 'VIDEO' && e.target.controls) {
-              // Let controls work normally; do not open lightbox on control interaction
+          
+          // Click handler for lightbox
+          card.addEventListener('click', function(e) {
+            // Don't open lightbox if clicking video controls
+            if (e.target.tagName === 'VIDEO' && e.target.hasAttribute('controls')) {
               return;
             }
             openLightbox(index);
           });
+          
           galleryContainer.appendChild(card);
         });
-        mediaElements = document.querySelectorAll('.media-card');
       }
 
       function openLightbox(index) {
@@ -507,7 +546,8 @@
         lightbox.classList.add('active');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
-        // Pause all gallery videos when lightbox opens (optional)
+        
+        // Pause gallery videos
         document.querySelectorAll('.media-card video').forEach(v => v.pause());
       }
 
@@ -515,15 +555,17 @@
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        // Resume muted autoplay for visible videos in grid (optional)
+        
+        // Resume gallery videos
         document.querySelectorAll('.media-card video').forEach(v => {
-          if (v.autoplay) v.play().catch(() => {});
+          v.play().catch(() => {});
         });
       }
 
       function updateLightboxContent() {
         const item = mediaItems[currentIndex];
         if (!item) return;
+        
         lightboxContent.innerHTML = '';
 
         let media;
@@ -533,30 +575,34 @@
           media.alt = item.alt;
           media.className = 'lightbox-media';
         } else {
-          media = document.createElement('video');
-          media.src = item.src;
+          // Video with controls in lightbox
+          media = createVideoElement(item.src, true);
           media.className = 'lightbox-media';
-          media.setAttribute('controls', '');
-          media.setAttribute('playsinline', '');
           media.setAttribute('autoplay', '');
-          media.setAttribute('muted', '');  // muted for autoplay policy
-          media.setAttribute('loop', '');
-          // Add a small trick: if user wants sound they can unmute via controls
+          
+          // Unmute in lightbox for better experience
+          media.addEventListener('loadeddata', function() {
+            media.muted = false;
+            media.play().catch(() => {
+              // If unmuted autoplay fails, stay muted
+              media.muted = true;
+              media.play().catch(() => {});
+            });
+          });
         }
-        lightboxContent.appendChild(media);
         
-        // Update counter
+        lightboxContent.appendChild(media);
         counterEl.textContent = `${currentIndex + 1} / ${mediaItems.length}`;
       }
 
       function showNext(e) {
-        e.stopPropagation();
+        if (e) e.stopPropagation();
         currentIndex = (currentIndex + 1) % mediaItems.length;
         updateLightboxContent();
       }
 
       function showPrev(e) {
-        e.stopPropagation();
+        if (e) e.stopPropagation();
         currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
         updateLightboxContent();
       }
@@ -566,12 +612,10 @@
         if (!lightbox.classList.contains('active')) return;
         if (e.key === 'ArrowRight') {
           e.preventDefault();
-          currentIndex = (currentIndex + 1) % mediaItems.length;
-          updateLightboxContent();
+          showNext();
         } else if (e.key === 'ArrowLeft') {
           e.preventDefault();
-          currentIndex = (currentIndex - 1 + mediaItems.length) % mediaItems.length;
-          updateLightboxContent();
+          showPrev();
         } else if (e.key === 'Escape') {
           e.preventDefault();
           closeLightbox();
@@ -583,8 +627,7 @@
       nextBtn.addEventListener('click', showNext);
       prevBtn.addEventListener('click', showPrev);
 
-      // Close when clicking background (but not on media/buttons)
-      lightbox.addEventListener('click', (e) => {
+      lightbox.addEventListener('click', function(e) {
         if (e.target === lightbox) {
           closeLightbox();
         }
@@ -592,10 +635,8 @@
 
       document.addEventListener('keydown', handleKeyDown);
 
-      // Initialize everything
+      // Initialize
       buildGallery();
-
-      // Ensure lightbox hidden on load
       lightbox.classList.remove('active');
       lightbox.setAttribute('aria-hidden', 'true');
     })();

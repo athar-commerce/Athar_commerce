@@ -27,7 +27,9 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 4rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Glassmorphism Header */
@@ -105,10 +107,15 @@
             line-height: 1.7;
         }
 
+        /* Main Content Wrapper */
+        .content-wrapper {
+            flex: 1;
+        }
+
         /* Gallery Grid */
         .gallery-container {
             max-width: 1400px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 4rem;
             padding: 0 1.5rem;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -156,6 +163,40 @@
             aspect-ratio: 1080 / 2127; /* Works beautifully for both 1080x2127 and 1080x2400 via object-fit */
         }
 
+        /* Footer */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         /* Responsive Design Adjustments */
         @media (max-width: 900px) {
             .pc-format {
@@ -175,56 +216,66 @@
         </a>
     </header>
 
-    <section class="hero">
-        <h1>Transforming Clicks into Loyal Customers</h1>
-        <p>At Athar Commerce, we specialize in crafting high-converting e-commerce experiences. We design strategic, visually stunning websites tailored to drive sales, optimize user journeys, and scale your brand's digital presence.</p>
-    </section>
+    <div class="content-wrapper">
+        <section class="hero">
+            <h1>Transforming Clicks into Loyal Customers</h1>
+            <p>At Athar Commerce, we specialize in crafting high-converting e-commerce experiences. We design strategic, visually stunning websites tailored to drive sales, optimize user journeys, and scale your brand's digital presence.</p>
+        </section>
 
-    <section class="section-intro">
-        <h2>Conceptual Design Gallery</h2>
-        <p>Explore a curated selection of our structural blueprints and visual mockups. These design examples illustrate our creative approach to building intuitive, conversion-driven layouts before formal development begins.</p>
-    </section>
+        <section class="section-intro">
+            <h2>Conceptual Design Gallery</h2>
+            <p>Explore a curated selection of our structural blueprints and visual mockups. These design examples illustrate our creative approach to building intuitive, conversion-driven layouts before formal development begins.</p>
+        </section>
 
-    <main class="gallery-container">
-        
-        <!-- PC Formatted Images -->
-        <div class="media-card pc-format">
-            <img src="Image1.jpg" alt="Athar Commerce Concept 1" loading="lazy">
-        </div>
-        <div class="media-card pc-format">
-            <img src="Image2.jpg" alt="Athar Commerce Concept 2" loading="lazy">
-        </div>
-        <div class="media-card pc-format">
-            <img src="Image3.jpg" alt="Athar Commerce Concept 3" loading="lazy">
-        </div>
+        <main class="gallery-container">
+            
+            <!-- PC Formatted Images -->
+            <div class="media-card pc-format">
+                <img src="Image1.jpg" alt="Athar Commerce Concept 1" loading="lazy">
+            </div>
+            <div class="media-card pc-format">
+                <img src="Image2.jpg" alt="Athar Commerce Concept 2" loading="lazy">
+            </div>
+            <div class="media-card pc-format">
+                <img src="Image3.jpg" alt="Athar Commerce Concept 3" loading="lazy">
+            </div>
 
-        <!-- Phone Formatted Images -->
-        <div class="media-card phone-format">
-            <img src="Image4.jpg" alt="Athar Commerce Mobile Concept 4" loading="lazy">
-        </div>
-        <div class="media-card phone-format">
-            <img src="Image5.jpg" alt="Athar Commerce Mobile Concept 5" loading="lazy">
-        </div>
-        <div class="media-card phone-format">
-            <img src="Image6.jpg" alt="Athar Commerce Mobile Concept 6" loading="lazy">
-        </div>
+            <!-- Phone Formatted Images -->
+            <div class="media-card phone-format">
+                <img src="Image4.jpg" alt="Athar Commerce Mobile Concept 4" loading="lazy">
+            </div>
+            <div class="media-card phone-format">
+                <img src="Image5.jpg" alt="Athar Commerce Mobile Concept 5" loading="lazy">
+            </div>
+            <div class="media-card phone-format">
+                <img src="Image6.jpg" alt="Athar Commerce Mobile Concept 6" loading="lazy">
+            </div>
 
-        <!-- Ordered Videos -->
-        <div class="media-card pc-format">
-            <video src="PC1_compressed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="media-card phone-format">
-            <video src="Phone2_compressed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="media-card pc-format">
-            <video src="PC3_compressed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
-        <div class="media-card phone-format">
-            <video src="Phone3_compressed.mp4" autoplay loop muted playsinline controls></video>
-        </div>
+            <!-- Ordered Videos -->
+            <div class="media-card pc-format">
+                <video src="PC1_compressed.mp4" autoplay loop muted playsinline controls></video>
+            </div>
+            <div class="media-card phone-format">
+                <video src="Phone2_compressed.mp4" autoplay loop muted playsinline controls></video>
+            </div>
+            <div class="media-card pc-format">
+                <video src="PC3_compressed.mp4" autoplay loop muted playsinline controls></video>
+            </div>
+            <div class="media-card phone-format">
+                <video src="Phone3_compressed.mp4" autoplay loop muted playsinline controls></video>
+            </div>
 
-    </main>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <a href="#" class="footer-logo">
+                Athar <span>Commerce</span> | <span style="font-family: 'Cairo', sans-serif;">أثر</span>
+            </a>
+            <p class="footer-text">&copy; 2026 Athar Commerce. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
-            </html>
-            
+</html>

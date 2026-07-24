@@ -62,7 +62,7 @@
         /* Hero Section */
         .hero {
             text-align: center;
-            padding: 9rem 2rem 4rem;
+            padding: 9rem 2rem 3rem;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -84,6 +84,27 @@
             margin: 0 auto;
         }
 
+        /* Transition Section */
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .section-intro h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .section-intro p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
         /* Gallery Grid */
         .gallery-container {
             max-width: 1400px;
@@ -98,7 +119,7 @@
         /* Media Cards styling */
         .media-card {
             background-color: var(--card-bg);
-            border-radius: 4px; /* Sharper corners to prevent hiding image details */
+            border-radius: 4px; /* Sharp corners */
             overflow: hidden;
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -120,29 +141,24 @@
         .media-card video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Ensures filling the aspect ratio without distortion */
             display: block;
         }
 
-        /* Layout Management for Aspect Ratios */
-        .landscape {
+        /* Layout Management for Exact Aspect Ratios */
+        .pc-format {
             grid-column: span 2;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 1841 / 932;
         }
         
-        .portrait {
+        .phone-format {
             grid-column: span 1;
-            aspect-ratio: 9 / 16;
-        }
-
-        .standard-img {
-            grid-column: span 1;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 1080 / 2127; /* Works beautifully for both 1080x2127 and 1080x2400 via object-fit */
         }
 
         /* Responsive Design Adjustments */
         @media (max-width: 900px) {
-            .landscape {
+            .pc-format {
                 grid-column: span 1;
             }
             .hero h1 {
@@ -164,45 +180,51 @@
         <p>At Athar Commerce, we specialize in crafting high-converting e-commerce experiences. We design strategic, visually stunning websites tailored to drive sales, optimize user journeys, and scale your brand's digital presence.</p>
     </section>
 
+    <section class="section-intro">
+        <h2>Conceptual Design Gallery</h2>
+        <p>Explore a curated selection of our structural blueprints and visual mockups. These design examples illustrate our creative approach to building intuitive, conversion-driven layouts before formal development begins.</p>
+    </section>
+
     <main class="gallery-container">
         
-        <!-- Standard Desktop/Horizontal Images -->
-        <div class="media-card standard-img">
-            <img src="Image1.jpg" alt="Athar Commerce Project 1" loading="lazy">
+        <!-- PC Formatted Images -->
+        <div class="media-card pc-format">
+            <img src="Image1.jpg" alt="Athar Commerce Concept 1" loading="lazy">
         </div>
-        <div class="media-card standard-img">
-            <img src="Image2.jpg" alt="Athar Commerce Project 2" loading="lazy">
+        <div class="media-card pc-format">
+            <img src="Image2.jpg" alt="Athar Commerce Concept 2" loading="lazy">
         </div>
-        <div class="media-card standard-img">
-            <img src="Image3.jpg" alt="Athar Commerce Project 3" loading="lazy">
+        <div class="media-card pc-format">
+            <img src="Image3.jpg" alt="Athar Commerce Concept 3" loading="lazy">
         </div>
 
-        <!-- Vertical Phone Images -->
-        <div class="media-card portrait">
-            <img src="Image4.jpg" alt="Athar Commerce Mobile Project 4" loading="lazy">
+        <!-- Phone Formatted Images -->
+        <div class="media-card phone-format">
+            <img src="Image4.jpg" alt="Athar Commerce Mobile Concept 4" loading="lazy">
         </div>
-        <div class="media-card portrait">
-            <img src="Image5.jpg" alt="Athar Commerce Mobile Project 5" loading="lazy">
+        <div class="media-card phone-format">
+            <img src="Image5.jpg" alt="Athar Commerce Mobile Concept 5" loading="lazy">
         </div>
-        <div class="media-card portrait">
-            <img src="Image6.jpg" alt="Athar Commerce Mobile Project 6" loading="lazy">
+        <div class="media-card phone-format">
+            <img src="Image6.jpg" alt="Athar Commerce Mobile Concept 6" loading="lazy">
         </div>
 
         <!-- Ordered Videos -->
-        <div class="media-card landscape">
+        <div class="media-card pc-format">
             <video src="PC1_compressed.mp4" autoplay loop muted playsinline controls></video>
         </div>
-        <div class="media-card portrait">
+        <div class="media-card phone-format">
             <video src="Phone2_compressed.mp4" autoplay loop muted playsinline controls></video>
         </div>
-        <div class="media-card landscape">
+        <div class="media-card pc-format">
             <video src="PC3_compressed.mp4" autoplay loop muted playsinline controls></video>
         </div>
-        <div class="media-card portrait">
+        <div class="media-card phone-format">
             <video src="Phone3_compressed.mp4" autoplay loop muted playsinline controls></video>
         </div>
 
     </main>
 
 </body>
-</html>
+            </html>
+            

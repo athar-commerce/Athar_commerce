@@ -108,6 +108,13 @@
             border-radius: 2px;
         }
 
+        .subsection-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-secondary);
+        }
+
         /* Grid System */
         .grid {
             display: grid;
@@ -147,12 +154,13 @@
             background-color: #000;
         }
 
+        /* Custom Aspect Ratios */
         .desktop-media {
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 1841 / 932;
         }
 
         .mobile-media {
-            aspect-ratio: 9 / 16;
+            aspect-ratio: 1080 / 2127;
             max-width: 300px;
             margin: 0 auto;
         }
@@ -164,7 +172,7 @@
             display: block;
         }
 
-        /* Optional Mockup Overlays for Polish */
+        /* Mockup Overlays */
         .mockup-frame {
             padding: 1rem;
             background: linear-gradient(145deg, #1e293b, #0f172a);
@@ -178,7 +186,8 @@
             background: #334155;
         }
 
-        .mobile-card video {
+        .mobile-card video,
+        .mobile-card img {
             border-radius: 22px;
         }
 
@@ -223,7 +232,7 @@
 
     <main class="container">
         
-        <!-- Desktop Projects Section -->
+        <!-- Desktop Video Section -->
         <section id="desktop-projects" style="margin-bottom: 6rem;">
             <div class="section-header">
                 <h2>Desktop Experiences</h2>
@@ -238,7 +247,7 @@
                         </div>
                     </div>
                     <div class="card-info">
-                        <h3>Café & Drinks Storefront</h3>
+                        <h3>Coffee Shop Design (Concept 1)</h3>
                     </div>
                 </div>
                 <!-- PC Video 2 -->
@@ -249,7 +258,7 @@
                         </div>
                     </div>
                     <div class="card-info">
-                        <h3>Café & Drinks Storefront</h3>
+                        <h3>Coffee Shop Design (Concept 2)</h3>
                     </div>
                 </div>
                 <!-- PC Video 3 -->
@@ -260,13 +269,13 @@
                         </div>
                     </div>
                     <div class="card-info">
-                        <h3>Restaurant Design</h3>
+                        <h3>Restaurant Design (Concept)</h3>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Mobile Projects Section -->
+        <!-- Mobile Video Section -->
         <section id="mobile-projects" style="margin-bottom: 6rem;">
             <div class="section-header">
                 <h2>Mobile Commerce</h2>
@@ -294,29 +303,64 @@
             </div>
         </section>
 
-        <!-- Static Designs Section -->
+        <!-- Design Gallery (Images) Section -->
         <section id="static-designs">
             <div class="section-header">
                 <h2>Design Gallery</h2>
-                <p style="color: var(--text-secondary);">High-fidelity UI concepts and promotional layouts.</p>
+                <p style="color: var(--text-secondary);">Conceptual design examples and UI visual mockups.</p>
             </div>
+
+            <!-- Desktop Screenshots (Image1, Image2, Image3) -->
+            <h3 class="subsection-title">Desktop Concepts</h3>
             <div class="grid grid-desktop">
                 <!-- Image 1 -->
                 <div class="card">
-                    <div class="media-container">
+                    <div class="media-container desktop-media">
                         <img src="Image1.jpg" alt="Athar Commerce UI Concept 1" loading="lazy">
                     </div>
                     <div class="card-info">
-                        <h3>UI Concept 1</h3>
+                        <h3>Coffee Shop UI (Concept 1)</h3>
                     </div>
                 </div>
                 <!-- Image 2 -->
                 <div class="card">
-                    <div class="media-container">
+                    <div class="media-container desktop-media">
                         <img src="Image2.jpg" alt="Athar Commerce UI Concept 2" loading="lazy">
                     </div>
                     <div class="card-info">
-                        <h3>UI Concept 2</h3>
+                        <h3>Coffee Shop UI (Concept 2)</h3>
+                    </div>
+                </div>
+                <!-- Image 3 -->
+                <div class="card">
+                    <div class="media-container desktop-media">
+                        <img src="Image3.jpg" alt="Athar Commerce UI Concept 3" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3>Restaurant UI (Concept)</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Screenshots (Image4, Image5, Image6) -->
+            <h3 class="subsection-title">Mobile Concepts</h3>
+            <div class="grid grid-mobile">
+                <!-- Image 4 -->
+                <div class="card mobile-card">
+                    <div class="media-container mobile-media">
+                        <img src="Image4.jpg" alt="Athar Commerce Mobile Concept 4" loading="lazy">
+                    </div>
+                </div>
+                <!-- Image 5 -->
+                <div class="card mobile-card">
+                    <div class="media-container mobile-media">
+                        <img src="Image5.jpg" alt="Athar Commerce Mobile Concept 5" loading="lazy">
+                    </div>
+                </div>
+                <!-- Image 6 -->
+                <div class="card mobile-card">
+                    <div class="media-container mobile-media">
+                        <img src="Image6.jpg" alt="Athar Commerce Mobile Concept 6" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -329,8 +373,6 @@
     </footer>
 
     <script>
-        // Optional JavaScript to handle smooth video playback on interaction
-        // Adds a play promise to avoid DOMException on aggressive autoplay policies
         document.addEventListener('DOMContentLoaded', () => {
             const videos = document.querySelectorAll('video');
             videos.forEach(video => {
